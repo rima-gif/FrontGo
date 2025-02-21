@@ -6,8 +6,8 @@ import { ForgotPasswordComponent } from './componets/forgot-password/forgot-pass
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: '**', redirectTo: 'login' } , // Redirection vers login si la route n'existe pas
   { path: 'forgot-password', component:ForgotPasswordComponent},  // Page mot de passe oublié
+  { path: '**', redirectTo: 'login' } , // Redirection vers login si la route n'existe pas
 
 
 ];
