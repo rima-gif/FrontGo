@@ -1,0 +1,16 @@
+/* styles.css ou styles.scss */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    background-image: url(/src/assets/images/IOT.jpg); /* Chemin de l'image */
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-attachment: fixed; /* Fixe l'image pour qu'elle ne défile pas */
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
