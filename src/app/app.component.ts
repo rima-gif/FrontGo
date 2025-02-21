@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet,RouterLink } from '@angular/router';
-import { ForgotPasswordComponent } from "./componets/forgot-password/forgot-password.component";
+import { RouterOutlet } from '@angular/router';
+// import { ForgotPasswordComponent } from "./componets/forgot-password/forgot-password.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, ForgotPasswordComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

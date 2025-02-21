@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-forgot-password',
-  template:` <h2>Récupération du mot de passe</h2>
-    <p>Veuillez saisir votre adresse e-mail pour réinitialiser votre mot de passe.</p>`,
   standalone: true,
   imports: [],
   templateUrl: './forgot-password.component.html',
