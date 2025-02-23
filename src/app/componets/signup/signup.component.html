@@ -1,1 +1,29 @@
-<p>signup works!</p>
+<div class="signup-container">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div id="wrapper">
+        <div class="logo-et-titre">
+            <img src="/assets/images/saeGroupe.png" alt="Logo SmartGO" />
+            <h1>SmartGO</h1>
+        </div>
+        <form>
+            <h3>S'inscrire</h3>
+
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" name="username" id="username" placeholder="Entrez votre nom d'utilisateur" autocomplete="username" />
+
+            <label for="user">Email</label>
+            <input type="email" name="user" id="user" placeholder="Entrez votre email" autocomplete="email" />
+
+            <label for="psw">Mot de passe</label>
+            <input type="password" name="psw" id="psw" placeholder="Entrez votre mot de passe" autocomplete="new-password" />
+
+            <button>S'inscrire</button>
+
+            <div class="create-account">
+                <span>Déjà un compte ?</span> <a routerLink="/login">Se connecter</a> </div>
+        </form>
+    </div>
+</div>

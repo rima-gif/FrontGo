@@ -1,4 +1,4 @@
-<body>
+<div class="login-container">
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -14,7 +14,7 @@
             <label for="user">Email</label>
             <input type="text" name="user" id="user" placeholder="Enter Email" autocomplete="email" />
 
-            <label for="psw">Mot de passe</label>
+            <label for="psw">password</label>
             <input type="password" name="psw" id="psw" placeholder="Enter Password" autocomplete="current-password" />
 
             <div class="forgot-password">
@@ -24,9 +24,9 @@
             <button>Se Connecter</button>
 
             <div class="create-account">
-                <span>Pas de compte ?</span> <a href="#">Créer un compte</a>
+                <span>Pas de compte ?</span>
+                <a routerLink="/signup">Créer un compte</a>
             </div>
         </form>
-
     </div>
-</body>
+</div>
