@@ -8,22 +8,30 @@
             <img src="/assets/images/saeGroupe.png" alt="Logo SmartGO" />
             <h1>SmartGO</h1>
         </div>
-        <form>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <h3>S'inscrire</h3>
 
             <label for="username">Nom d'utilisateur</label>
-            <input type="text" name="username" id="username" placeholder="Entrez votre nom d'utilisateur" autocomplete="username" />
+            <input type="text" formControlName="username" placeholder="Entrez votre nom d'utilisateur" />
 
-            <label for="user">Email</label>
-            <input type="email" name="user" id="user" placeholder="Entrez votre email" autocomplete="email" />
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" placeholder="Entrez votre email" />
 
-            <label for="psw">Mot de passe</label>
-            <input type="password" name="psw" id="psw" placeholder="Entrez votre mot de passe" autocomplete="new-password" />
+            <label for="password">Mot de passe</label>
+            <input type="password" formControlName="password" placeholder="Entrez votre mot de passe" />
 
-            <button>S'inscrire</button>
+            <button type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
+
+            <div *ngIf="successMessage" class="success-message">
+                {{ successMessage }}
+            </div>
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
 
             <div class="create-account">
-                <span>Déjà un compte ?</span> <a routerLink="/login">Se connecter</a> </div>
+                <span>Déjà un compte ?</span> <a routerLink="/login">Se connecter</a>
+            </div>
         </form>
     </div>
 </div>

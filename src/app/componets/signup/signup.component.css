@@ -133,4 +133,15 @@ form button:hover {
     border-radius: 50%;
     /* Ajoutez ici les couleurs et positions spécifiques à vos shapes */
 }
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
