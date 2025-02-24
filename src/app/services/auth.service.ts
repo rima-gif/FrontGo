@@ -10,13 +10,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signup(user: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.http.post(`${this.baseUrl}/signup`, user, {
-      headers,
-      withCredentials: true,  // ✅ Important pour envoyer les cookies
-      responseType: 'json'    // ✅ Assure que la réponse est bien interprétée en JSON
+  signup(data: any): Observable<any> {
+    return this.http.post('http://localhost:8080/auth/signup', data, { headers: { 'Content-Type': 'application/json' } });
+  }
+  // Connexion
+  signin(email: string, password: string): Observable<any> {
+    return this.http.post('http://localhost:8080/auth/signin',  { email, password }, {
+      headers: { 'Content-Type': 'application/json' }
     });
   }
-}
+
+  }
+

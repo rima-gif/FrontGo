@@ -8,8 +8,9 @@ export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component:ForgotPasswordComponent},
-  {path: 'changePass', component:ChangePasswordComponent},  // Page mot de passe oublié
-  { path: '**', redirectTo: 'login' } , // Redirection vers login si la route n'existe pas
+  {path: 'changePass', component:ChangePasswordComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login on app start
+  { path: '**', redirectTo: '/login' }, // Wildcard route for unknown paths  // Page mot de passe oublié
  
 
 ];
