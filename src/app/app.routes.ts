@@ -7,10 +7,8 @@ import { ChangePasswordComponent } from './componets/change-password/change-pass
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'forgot-password', component:ForgotPasswordComponent},
-  {path: 'changePass', component:ChangePasswordComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login on app start
-  { path: '**', redirectTo: '/login' }, // Wildcard route for unknown paths  // Page mot de passe oublié
- 
-
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ChangePasswordComponent }, // Corrigez ici
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Rediriger vers la page de connexion par défaut
+  { path: '**', redirectTo: '/login' }, // Route par défaut pour les chemins inconnus
 ];

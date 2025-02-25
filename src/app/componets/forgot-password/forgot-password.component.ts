@@ -29,10 +29,11 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    
     if (this.forgetPasswordForm.valid) {
       const email = this.forgetPasswordForm.value.email;
       
-      this.http.post('URL_DU_BACKEND/forgot-password', { email }).subscribe({
+      this.http.post('http://localhost:8080/auth/forgot-password', { email }).subscribe({
         next: () => {
           this.message = '✅ Un email de réinitialisation a été envoyé avec succès.';
           this.messageType = 'success';
