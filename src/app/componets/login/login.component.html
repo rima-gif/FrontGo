@@ -8,15 +8,15 @@
             <img src="/assets/images/saeGroupe.png" alt="Logo SmartGO" />
             <h1>SmartGO</h1>
         </div>
-        <form (ngSubmit)="login()">
+        <form [formGroup]="loginForm" (ngSubmit)="signin()">
             <h3>Connecter</h3>
 
             <label for="user">Email</label>
-            <input type="text" name="user" id="email" placeholder="Enter Email" autocomplete="email" [(ngModel)]="email" required />
+            <input type="text" name="user" id="email"  placeholder="Enter Email" formControlName="email" required  />
         
 
             <label for="psw">password</label>
-            <input type="password" name="psw" id="psw" placeholder="Enter Password" autocomplete="current-password" [(ngModel)]="password" required />
+            <input type="password" name="psw" id="psw" placeholder="Enter Password" formControlName="password" required/>
 
             <div class="forgot-password">
                 <a routerLink="/forgot-password">Mot de passe oublié ?</a>

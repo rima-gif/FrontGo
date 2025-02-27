@@ -1,45 +1,67 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importez Router au lieu de RouterLink
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, MatSnackBarModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] // Assurez-vous que c'est "styleUrls" et non "styleUrl"
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {} // Changez RouterLink en Router
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
-  login() {
-    if (!this.email || !this.password) {
-      this.errorMessage = "Veuillez remplir tous les champs.";
+  ngOnInit(): void {
+    // Initialisation du formulaire avec les validations
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  signin(): void {
+    // Vérifiez si le formulaire est invalide
+    if (this.loginForm.invalid) {
+      this.showNotification('Veuillez remplir tous les champs.', 'error-snackbar');
       return;
     }
-    this.authService.signin(this.email, this.password).subscribe({
+
+    // Appel au service d'authentification
+    this.authService.signin(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: (response) => {
-        console.log('Connexion réussie', response);
-
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', response.id);
-        localStorage.setItem('username', response.name);
-        localStorage.setItem('role', response.role);
-
-        this.router.navigate(['/dashbord']); // Utilisez Router pour naviguer
+        console.log(response); // Ajout d'un log pour vérifier la réponse
+        if (response.status === 'success') {
+          this.showNotification('✅ Connexion réussie 🎉', 'success-snackbar');
+        } else {
+          this.showNotification('❌ Email ou mot de passe invalide.', 'error-snackbar');
+        }
       },
-      error: (error) => {
-        console.error('Erreur de connexion:', error);
-        this.errorMessage = "Email ou mot de passe incorrect.";
+      error: () => {
+        this.showNotification('❌ Une erreur est survenue. Veuillez réessayer.', 'error-snackbar');
       }
+    });
+  }
+
+  private showNotification(message: string, panelClass: string): void {
+    // Affichage de la notification
+    this.snackBar.open(message, 'Fermer', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      panelClass: [panelClass]
     });
   }
 }
