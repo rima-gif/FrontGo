@@ -54,9 +54,9 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
+//partie notification 
   private showNotification(message: string, panelClass: string): void {
-    // Affichage de la notification
+ 
     this.snackBar.open(message, 'Fermer', {
       duration: 3000,
       verticalPosition: 'top',
