@@ -1,0 +1,198 @@
+/* Reset CSS (recommandé) */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'poppins', sans-serif;
+}
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    background: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: minmax(100px, 2fr) 10fr 0.4fr 1fr; /* Utilisation de minmax */
+    align-items: center;
+    z-index: 1;
+}
+
+.logo h2 {
+    color: orangered;
+    font-size: large;
+}
+
+.search {
+    position: relative;
+    width: 60%;
+    justify-self: center;
+}
+
+.search input {
+    width: 100%;
+    height: 40px;
+    padding: 0 40px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: #f5f5f5;
+}
+
+.search label {
+    position: absolute;
+    right: 15px;
+    top: 10px; /* Ajuster pour aligner avec l'input */
+    cursor: pointer;
+}
+
+.user {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.user img {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Pour que l'image remplisse bien le conteneur */
+    border-radius: 10%; /* Pour un cercle */
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    width: 260px;
+    height: calc(100vh - 60px); /* Hauteur qui remplit l'écran moins la topbar */
+    background: #ec8218;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    overflow-y: auto; /* Ajout d'un défilement vertical si nécessaire */
+}
+
+.sidebar ul {
+    list-style: none; /* Supprimer les puces */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    width: 100%;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    height: 60px;
+    font-style: normal;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+    padding: 0 15px; /* Ajout de padding pour espacer le texte */
+}
+
+.sidebar ul li a mat-icon { /* Utiliser mat-icon directement */
+    min-width: 60px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Main section */
+.main {
+    position: absolute;
+    top: 60px;
+    left: 260px;
+    width: calc(100% - 260px);
+    min-height: calc(100vh - 60px);
+    background: #f5f5f5;
+    padding-top: 20px; /* Ajout de padding pour éviter le chevauchement avec la topbar */
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 80px; /* Réduction de l'écart */
+    padding: 20px; /* Réduction du padding */
+}
+
+.cards .card {
+    display: flex;
+    flex-direction: column; /* Organisation verticale */
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+    width: 200px; /* Garder une largeur fixe ou utiliser min-width */
+    min-height: 150px; /* Utiliser min-height pour s'adapter au contenu */
+    padding: 20px; /* Réduction du padding */
+}
+
+.number {
+    font-size: 24px; /* Réduction de la taille de la police */
+    font-weight: 500;
+    color: #ec8218;
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ou center si vous préférez */
+}
+
+.number-icon {
+    display: inline-flex;
+    align-items: center; /* Centrer verticalement */
+    min-height: 36px; /* Ajuster la hauteur minimale */
+    overflow: hidden; /* Éviter le débordement */
+}
+
+.number-icon mat-icon {
+    font-size: 36px;
+    color: blue;
+    margin-left: 2px;
+    font-weight: 600;
+    line-height: 1; /* Ajuster la hauteur de ligne */
+    vertical-align: middle; /* Aligner verticalement au milieu */
+}
+.card-name {
+    color: #888;
+    font-weight: 600;
+    font-size: 14px; /* Réduction de la taille de la police */
+}
+
+.icon-box mat-icon { /* Utiliser mat-icon directement */
+    font-size: 24px;
+    color: blue;
+}
+.user {
+    position: relative;
+    width: auto; /* Ajuster la largeur */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'image et le texte */
+  }
+  
+  .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Pour un cercle */
+    object-fit: cover;
+  }
+  
+  .user span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }

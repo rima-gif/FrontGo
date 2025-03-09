@@ -1,0 +1,178 @@
+.container {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .title-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .title-container i {
+    margin-right: 10px;
+    font-size: 1.5em;
+  }
+  
+  h2 {
+    text-align: center;
+    position: relative;
+    margin: 0;
+  }
+  
+  .add-robot-button {
+    background-color:#ec8218;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* .add-robot-button:hover {
+    background-color:transparent;
+  } */
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  input[type="text"] {
+    width: 30%;
+    padding: 8px 30px 8px 30px; /* Ajout de padding à gauche et à droite pour l'icône */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Ajout de bordures très arrondies */
+    
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 65%; /* Centre l'icône horizontalement */
+    transform: translate(-50%, -50%); /* Centre l'icône précisément */
+    color: #999;
+  }
+  
+  #dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  #dataTable th,
+  #dataTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #dataTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  #dataTable tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .action-button {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .edit-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .edit-button:hover,
+  .delete-button:hover {
+    opacity: 0.8;
+  }
+  /* Style de la boîte modale */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    z-index: 1000;
+  }
+  
+  /* Contenu de la boîte modale */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Bouton de fermeture */
+  .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: red;
+  }
+  
+  /* Style du formulaire */
+  .form-group {
+    margin-bottom: 15px;
+    border-radius: 50px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .save-button, .cancel-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }

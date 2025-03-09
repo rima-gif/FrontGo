@@ -44,6 +44,13 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         console.log(response); // Ajout d'un log pour vérifier la réponse
         if (response.status === 'success') {
+          // Stocker les informations de l'utilisateur
+          this.authService.setUserData(response);
+
+          // Rediriger vers le tableau de bord
+          this.router.navigate(['/dashboard']);
+
+          // Afficher une notification de succès
           this.showNotification('✅ Connexion réussie 🎉', 'success-snackbar');
         } else {
           this.showNotification('❌ Email ou mot de passe invalide.', 'error-snackbar');
@@ -54,9 +61,9 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-//partie notification 
+
+  // Méthode pour afficher une notification
   private showNotification(message: string, panelClass: string): void {
- 
     this.snackBar.open(message, 'Fermer', {
       duration: 3000,
       verticalPosition: 'top',
