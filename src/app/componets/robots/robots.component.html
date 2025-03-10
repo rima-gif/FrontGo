@@ -19,8 +19,8 @@
           <div class="form-group">
             <label for="robotStatus">Statut</label>
             <select id="robotStatus" [(ngModel)]="newRobot.isConnected" name="robotStatus" required>
-              <option value="true">Connecté</option>
-              <option value="false">Déconnecté</option>
+              <option [value]="true">Connecté</option>
+              <option [value]="false">Déconnecté</option>
             </select>
           </div>
           <button type="submit" class="save-button">Enregistrer</button>
@@ -34,6 +34,7 @@
         title="Tapez un nom de robot">
       <i class="fas fa-search search-icon"></i>
     </div>
+  
     <table id="dataTable">
       <thead>
         <tr>
@@ -58,3 +59,4 @@
       </tbody>
     </table>
   </div>
+  
