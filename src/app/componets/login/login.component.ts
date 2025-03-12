@@ -33,23 +33,22 @@ export class LoginComponent implements OnInit {
   }
 
   signin(): void {
-    // Vérifiez si le formulaire est invalide
     if (this.loginForm.invalid) {
       this.showNotification('Veuillez remplir tous les champs.', 'error-snackbar');
       return;
     }
-
-    // Appel au service d'authentification
+  
     this.authService.signin(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: (response) => {
-        console.log(response); // Ajout d'un log pour vérifier la réponse
-        if (response.status === 'success') {
-          // Stocker les informations de l'utilisateur
-          this.authService.setUserData(response);
-
-          // Rediriger vers le tableau de bord
+        console.log('Login response:', response); // Log the entire response to check its structure
+  
+        if (response && response.token) {
+          // Utiliser la bonne méthode pour sauvegarder les données utilisateur
+          this.authService.saveUserData(response);
+  
+          // Naviguer vers le dashboard
           this.router.navigate(['/dashboard']);
-
+  
           // Afficher une notification de succès
           this.showNotification('✅ Connexion réussie 🎉', 'success-snackbar');
         } else {
@@ -61,6 +60,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  
 
   // Méthode pour afficher une notification
   private showNotification(message: string, panelClass: string): void {

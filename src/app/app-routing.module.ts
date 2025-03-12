@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignupComponent } from './componets/signup/signup.component'; 
-import { LoginComponent } from './componets/login/login.component'; 
+import { SignupComponent } from './componets/signup/signup.component';
+import { LoginComponent } from './componets/login/login.component';
 import { ForgotPasswordComponent } from './componets/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './componets/change-password/change-password.component';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { DashboardComponent } from './componets/dashboard/dashboard.component';
+import{RobotsComponent} from './componets/robots/robots.component';
+import{AuthGuard} from './services/auth.guard';
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },  // Page de connexion par défaut
-  { path: 'forgot-password', component: ForgotPasswordComponent },  // Page mot de passe oublié
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
-  { path: 'reset-password'  , component: ChangePasswordComponent } // Corrigé ici pour correspondre à app.routes.ts
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ChangePasswordComponent },
+  { path: 'robots', component: RobotsComponent,canActivate: [AuthGuard] },
+  // Redirection par défaut
+  { path: '**', redirectTo: '/login' } // Gérer les routes inconnues
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -4,6 +4,7 @@ import { AppComponent } from './app/app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
+
 // ✅ Ajouter withFetch() dans appConfig en étendant ses providers
 const updatedAppConfig = {
   ...appConfig,

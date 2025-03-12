@@ -21,16 +21,14 @@ import { AuthService } from '../../services/auth.service'; // Importez AuthServi
   ]
 })
 export class DashboardComponent implements OnInit {
-  user: any; // Pour stocker les informations de l'utilisateur
-  isSuperAdmin: boolean = false; // Pour vérifier si l'utilisateur est un Super Admin
+  user: any; 
+  isSuperAdmin: boolean = false; 
 
-  constructor(private authService: AuthService, private router: Router) { } // Injectez AuthService et Router
+  constructor(private authService: AuthService, private router: Router) { } 
 
   ngOnInit(): void {
-    // Récupérer les informations de l'utilisateur connecté
     this.user = this.authService.getUser();
 
-    // Vérifier si l'utilisateur a le rôle de Super Admin
     if (this.user && this.user.role) {
       this.isSuperAdmin = this.user.role.includes('ROLE_SUPER_ADMIN');
     }

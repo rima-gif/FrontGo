@@ -1,19 +1,27 @@
-/* styles.css ou styles.scss */
-body, html {
+/* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset et styles généraux */
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-  }
-  
-  body {
-  
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Fond d'écran */
+body {
     background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
     background-position: center; /* Centre l'image */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-repeat: no-repeat; /* Empêche la répétition */
     background-attachment: fixed; /* Fixe l'image pour qu'elle ne défile pas */
-  }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Ajoute un conteneur principal qui remplit l'écran */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
