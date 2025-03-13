@@ -54,10 +54,8 @@ export class RobotsComponent implements OnInit {
       alert("Token JWT manquant !");
       return;
     }
-
-    // Remplacer "true" par "CONNECTED" ou "DISCONNECTED" pour le statut
-    this.newRobot.status = this.newRobot.status === 'true' ? 'CONNECTED' : 'DISCONNECTED';
-
+  
+    // Ne pas modifier la valeur de status ici, elle est déjà correctement définie par l'utilisateur.
     // Enregistrer le robot
     this.robotService.addRobot(this.newRobot).subscribe({
       next: (robot) => {
@@ -70,7 +68,7 @@ export class RobotsComponent implements OnInit {
       }
     });
   }
-
+  
   // Supprimer un robot
   deleteRobot(index: number): void {
     const robotId = this.robots[index]?.id;
