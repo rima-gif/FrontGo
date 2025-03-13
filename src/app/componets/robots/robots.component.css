@@ -33,20 +33,36 @@ h2 {
   text-transform: uppercase;  /* Mettre le texte en majuscules */
 }
 
-/* Bouton Ajouter Robot */
 .add-robot-button {
   background-color: #ec8218;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-robot-button i {
+  font-size: 20px;
 }
 
 .add-robot-button:hover {
-  background-color: #d77614; /* Hover effect avec une couleur plus sombre */
+  background-color: #d77614;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
+.add-robot-button:active {
+  transform: scale(0.95);
+}
+
 
 /* Recherche */
 .search-container {
@@ -213,14 +229,14 @@ input[type="text"] {
 /* Statut des robots */
 .status-connected {
   background-color: lightgreen;
-  color: green;
+  color: white;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
 .status-disconnected {
   background-color: lightcoral;
-  color: red;
+  color: white;
   padding: 5px 10px;
   border-radius: 5px;
 }

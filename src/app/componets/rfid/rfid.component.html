@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="header">
+    <div class="title-container">
+      <i class="fas fa-map-marker-alt"></i>
+      <h2>Gestion de Radio Fréquence ID</h2>
+    </div>
+    <button class="add-robot-button" (click)="openAddModal()">Ajouter UID</button>
+  </div>
+
+  <div class="modal" *ngIf="showAddFrequencyModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ isEditing ? 'Modifier' : 'Ajouter' }} un UID</h3>
+      <form [formGroup]="frequencyForm" (ngSubmit)="saveUID()">
+        <div class="form-group">
+          <label for="uid">UID</label>
+          <input type="text" id="uid" formControlName="uid" required>
+        </div>
+        <button type="submit" class="save-button">
+          {{ isEditing ? 'Modifier' : 'Enregistrer' }}
+        </button>
+        <button type="button" class="cancel-button" (click)="closeModal()">Annuler</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="search">
+    <input type="text" id="myInput" placeholder="Rechercher un UID..." title="Tapez un UID">
+    <i class="fas fa-search search-icon"></i>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>UID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let frequency of frequencies">
+        <td>{{ frequency.uid }}</td>
+        <td>
+          <button class="action-button edit-button" (click)="editUID(frequency)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-button delete-button" (click)="deleteUID(frequency.id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
