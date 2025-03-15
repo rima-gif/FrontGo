@@ -1,7 +1,8 @@
 <div class="container">
   <div class="topbar">
     <div class="logo">
-      <h2>SmartGo</h2>
+      <img src="/assets/images/saeGroupe.png" alt="SmartGo Logo" class="logo-img" />
+      <h2>SmartGo</h2> 
     </div>
     <div class="search">
       <input type="text" id="search" placeholder="chercher ici" />
@@ -9,8 +10,9 @@
     </div>
     <mat-icon>notifications</mat-icon>
     <div class="user">
-      <img src="/assets/images/saeGroupe.png" alt="Logo SmartGO" />
-      <span *ngIf="user">{{ user.name }}</span> <!-- Afficher le nom de l'utilisateur -->
+      <img src="/assets/images/superad.webp" alt="Logo SmartGO" />
+      <span *ngIf="userName">{{ userName }}</span>
+      <span *ngIf="userRole" class="user-role-badge">{{ userRole }}</span>
     </div>
   </div>
 
@@ -22,9 +24,9 @@
       <li>
         <a routerLink="/robots"><mat-icon>smart_toy</mat-icon> <div>Robot</div></a>
       </li>
-      <li *ngIf="isSuperAdmin"> <!-- Afficher seulement pour les Super Admins -->
+      <li *ngIf="isSuperAdmin">
         <a routerLink="/machines"><mat-icon>build</mat-icon> <div>Machines</div></a>
-      </li>
+    </li>
       <li>
         <a routerLink="/locations"><mat-icon>location_on</mat-icon> <div>Location</div></a>
       </li>
@@ -34,7 +36,7 @@
       <li>
         <a routerLink="/map"><mat-icon>map</mat-icon> <div>Map</div></a>
       </li>
-      <li *ngIf="isSuperAdmin"> <!-- Afficher seulement pour les Super Admins -->
+   <li>
         <a routerLink="/settings"><mat-icon>settings</mat-icon> <div>Settings</div></a>
       </li>
       <li>

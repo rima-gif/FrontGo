@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,12 +28,13 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
-  getUser(): any {
-    return {
-      role: localStorage.getItem('role'),
-      token: localStorage.getItem('token')
-    };
+   getUser(): any {
+     return {
+       role: localStorage.getItem('role'),
+       token: localStorage.getItem('token')
+     };
   }
+ 
 
   // Vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean { 

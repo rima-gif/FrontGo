@@ -21,38 +21,44 @@ import { AuthService } from '../../services/auth.service'; // Importez AuthServi
   ]
 })
 export class DashboardComponent implements OnInit {
-  user: any; 
-  isSuperAdmin: boolean = false; 
+  user: any;
+  isSuperAdmin: boolean = false;
+  userRole: string | null = null;
+  userName: string | null = null; // Pour afficher le nom aussi
 
-  constructor(private authService: AuthService, private router: Router) { } 
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUser();
-
-    if (this.user && this.user.role) {
-      this.isSuperAdmin = this.user.role.includes('ROLE_SUPER_ADMIN');
+    const user = this.authService.getUser();
+    if (user) {
+        this.userRole = user.role;
+        this.userName = user.name;
+        // Option 1 : Comparer en Majuscules
+        if (this.userRole === 'ROLE_SUPER_ADMIN') {
+            this.isSuperAdmin = true;
+        }
+        // Option 2 : Ignorer la Casse
+        // if (this.userRole && this.userRole.toLowerCase() === 'role_super_admin') {
+        //     this.isSuperAdmin = true;
+        // }
+        console.log('user:', user);
+        console.log('userRole:', this.userRole);
+        console.log('isSuperAdmin:', this.isSuperAdmin);
     }
+}
 
-    // Afficher les informations de l'utilisateur dans la console pour vérification
-    console.log('Utilisateur connecté :', this.user);
-    console.log('Est Super Admin :', this.isSuperAdmin);
-  }
-
-  // Méthode pour gérer les utilisateurs (Super Admin seulement)
   manageUsers(): void {
     console.log('Gérer les utilisateurs');
     this.router.navigate(['/manage-users']); // Redirigez vers la page de gestion des utilisateurs
   }
 
-  // Méthode pour gérer les robots (Super Admin seulement)
   manageRobots(): void {
     console.log('Gérer les robots');
-    this.router.navigate(['/manage-robots']); // Redirigez vers la page de gestion des robots
+    this.router.navigate(['/manage-robots']); 
   }
 
-  // Méthode pour voir les robots (Utilisateurs normaux)
   viewRobots(): void {
     console.log('Voir les robots');
-    this.router.navigate(['/robots']); // Redirigez vers la page des robots
+    this.router.navigate(['/robots']); 
   }
 }

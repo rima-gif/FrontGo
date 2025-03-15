@@ -1,7 +1,7 @@
 /* Conteneur principal */
 .container {
   padding: 20px;
-  background-color: #f7f7f7;
+  background-color: #f7f7f7; /* Fond clair pour contraster avec les éléments */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ec8218;
+  border-bottom: 2px solid #ec8218; /* Bordure décorative */
   padding-bottom: 10px;
 }
 
@@ -23,14 +23,14 @@
 .title-container i {
   margin-right: 10px;
   font-size: 1.5em;
-  color: #ec8218;
+  color: #ec8218; /* Icône en couleur orange */
 }
 
 h2 {
   margin: 0;
   color: #333;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-weight: bold;  /* Rendre le texte en gras */
+  text-transform: uppercase;  /* Mettre le texte en majuscules */
 }
 
 .add-robot-button {
@@ -63,13 +63,13 @@ h2 {
   transform: scale(0.95);
 }
 
+
 /* Recherche */
 .search-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
   position: relative;
-  margin: 50px auto; /* Centrer le conteneur et ajouter une marge verticale */
-
 }
 
 input[type="text"] {
@@ -77,7 +77,7 @@ input[type="text"] {
   padding: 8px 30px;
   border: 1px solid #ccc;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: #fff; /* Fond blanc pour l'input */
   box-sizing: border-box;
   font-size: 14px;
 }
@@ -85,49 +85,36 @@ input[type="text"] {
 .search-icon {
   position: absolute;
   top: 50%;
-  left: 100%;
-  transform: translate(50%, 50%);
+  left: 60%;
+  transform: translate(-50%, -50%);
   color: #999;
 }
 
 /* Table des robots */
-table {
+#dataTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #fff; /* Fond blanc pour la table */
   border-radius: 8px;
 }
 
-table th,
-table td {
+#dataTable th,
+#dataTable td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-table th {
+#dataTable th {
   background-color: #f9f9f9;
   font-weight: bold;
   color: #555;
 }
 
-table tbody tr:hover {
+#dataTable tbody tr:hover {
   background-color: #f1f1f1;
-}
-
-table th:nth-child(1), 
-table td:nth-child(1) {
-  min-width: 200px;
-  padding-right: 30px;
-}
-
-table th:last-child, 
-table td:last-child {
-  text-align: center;
-  min-width: 150px;
-  padding-left: 30px;
 }
 
 /* Boutons Action (Edit / Delete) */
@@ -136,7 +123,7 @@ table td:last-child {
   padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 5px;
   transition: opacity 0.3s ease;
 }
 
@@ -178,6 +165,7 @@ table td:last-child {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Bouton de fermeture */
 .close {
   float: right;
   font-size: 24px;
@@ -189,6 +177,7 @@ table td:last-child {
   color: red;
 }
 
+/* Formulaire dans la modale */
 .form-group {
   margin-bottom: 15px;
 }
