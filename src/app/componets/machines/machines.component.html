@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- Header -->
+  <div class="main">
   <div class="header">
     <div class="title-container">
       <i class="fas fa-microchip"></i> <h2>Gestion des Machines</h2>
@@ -7,7 +7,6 @@
     <button class="add-robot-button" (click)="openAddMachineModal()">Ajouter Machine</button>
   </div>
 
-  <!-- Modal pour Ajouter une Machine -->
   <div class="modal" *ngIf="showAddMachineModal">
     <div class="modal-content">
       <span class="close" (click)="closeAddMachineModal()">&times;</span>
@@ -31,7 +30,6 @@
     </div>
   </div>
 
-  <!-- Modal pour Modifier une Machine -->
 <div class="modal" *ngIf="showEditMachineModal">
   <div class="modal-content">
     <span class="close" (click)="closeEditMachineModal()">&times;</span>
@@ -58,7 +56,7 @@
 </div>
 
 
-  <!-- Recherche -->
+  
   <div class="search-container">
     <input type="text" id="myInput" (keyup)="searchMachines()" placeholder="Rechercher des machines..." title="Tapez un nom de machine">
     <i class="fas fa-search search-icon"></i>
@@ -88,4 +86,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

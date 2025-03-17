@@ -6,10 +6,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   color: #e0e0e0;
   height: 100%;
-  background-color: #1e1e1e; /* Noir avec 70% d'opacité */
+  background-color: #1e1e1e; 
 }
 .main {
-  position: relative; /* Ajoutez cette ligne pour permettre à ::before de se positionner correctement */
+  position: relative; 
 }
 
 .main::before {
@@ -109,7 +109,7 @@ input[type="text"] {
   color: #999;
 }
 
-/* Table des robots */
+
 #dataTable {
   width: 100%;
   border-collapse: collapse;
@@ -137,7 +137,7 @@ input[type="text"] {
   background-color: #333;
 }
 
-/* Boutons Action (Edit / Delete) */
+
 .action-button {
   border: none;
   padding: 6px 10px;
@@ -162,7 +162,7 @@ input[type="text"] {
   opacity: 0.8;
 }
 
-/* Style de la boîte modale */
+
 .modal {
   display: flex;
   justify-content: center;

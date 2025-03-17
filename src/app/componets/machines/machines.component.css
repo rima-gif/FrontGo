@@ -1,17 +1,36 @@
-/* Conteneur principal */
+
+
 .container {
   padding: 20px;
-  background-color: #f7f7f7; /* Fond clair pour contraster avec les éléments */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: -1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;
+  height: 100%;
+  background-color: #1e1e1e; 
+}
+.main {
+  position: relative; 
 }
 
+.main::before {
+  content: '';
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width:400px;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.3), rgba(0, 204, 255, 0.1));
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+}
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ec8218; /* Bordure décorative */
+  border-bottom: 2px solid #6699CC;
   padding-bottom: 10px;
 }
 
@@ -23,19 +42,19 @@
 .title-container i {
   margin-right: 10px;
   font-size: 1.5em;
-  color: #ec8218; /* Icône en couleur orange */
+  color: #6699CC;
 }
 
 h2 {
   margin: 0;
-  color: #333;
-  font-weight: bold;  /* Rendre le texte en gras */
-  text-transform: uppercase;  /* Mettre le texte en majuscules */
+  color: #e0e0e0;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .add-robot-button {
-  background-color: #ec8218;
-  color: white;
+  background-color: #6699CC;
+  color: #1e1e1e;
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
@@ -46,7 +65,7 @@ h2 {
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .add-robot-button i {
@@ -54,15 +73,14 @@ h2 {
 }
 
 .add-robot-button:hover {
-  background-color: #d77614;
+  background-color: #6699CC;
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
 }
 
 .add-robot-button:active {
   transform: scale(0.95);
 }
-
 
 /* Recherche */
 .search-container {
@@ -75,9 +93,10 @@ h2 {
 input[type="text"] {
   width: 30%;
   padding: 8px 30px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 20px;
-  background-color: #fff; /* Fond blanc pour l'input */
+  background-color: #333;
+  color: #e0e0e0;
   box-sizing: border-box;
   font-size: 14px;
 }
@@ -86,38 +105,39 @@ input[type="text"] {
   position: absolute;
   top: 50%;
   left: 60%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   color: #999;
 }
 
-/* Table des robots */
+
 #dataTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  background-color: #fff; /* Fond blanc pour la table */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  background-color: #2c2c2c;
   border-radius: 8px;
+  color: #e0e0e0;
 }
 
 #dataTable th,
 #dataTable td {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #555;
 }
 
 #dataTable th {
-  background-color: #f9f9f9;
+  background-color: #3a3a3a;
   font-weight: bold;
-  color: #555;
+  color: #e0e0e0;
 }
 
 #dataTable tbody tr:hover {
-  background-color: #f1f1f1;
+  background-color: #333;
 }
 
-/* Boutons Action (Edit / Delete) */
+
 .action-button {
   border: none;
   padding: 6px 10px;
@@ -142,7 +162,7 @@ input[type="text"] {
   opacity: 0.8;
 }
 
-/* Style de la boîte modale */
+
 .modal {
   display: flex;
   justify-content: center;
@@ -152,17 +172,18 @@ input[type="text"] {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
 /* Contenu de la boîte modale */
 .modal-content {
-  background-color: white;
+  background-color: #333;
   padding: 20px;
   border-radius: 10px;
   width: 350px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  color: #e0e0e0;
 }
 
 /* Bouton de fermeture */
@@ -171,6 +192,7 @@ input[type="text"] {
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+  color: #e0e0e0;
 }
 
 .close:hover {
@@ -186,6 +208,7 @@ input[type="text"] {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #e0e0e0;
 }
 
 .form-group input,
@@ -193,8 +216,10 @@ input[type="text"] {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 4px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
 }
 
 /* Boutons Enregistrer / Annuler */
@@ -228,14 +253,14 @@ input[type="text"] {
 
 /* Statut des robots */
 .status-connected {
-  background-color: lightgreen;
-  color: white;
+  background-color: lightgreen; /* Arrière-plan inchangé */
+  color:  white;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
 .status-disconnected {
-  background-color: lightcoral;
+  background-color: lightcoral; /* Arrière-plan inchangé */
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -244,5 +269,5 @@ input[type="text"] {
 /* Icône robot */
 .robot-icon {
   margin-right: 5px;
-  color: #ec8218;
+  color:#6699CC;
 }
