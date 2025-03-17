@@ -10,10 +10,16 @@
     </div>
     <mat-icon>notifications</mat-icon>
     <div class="user">
-      <img src="/assets/images/superad.webp" alt="Logo SmartGO" />
+      <img src="/assets/images/superad.webp" alt="Logo SmartGO" (click)="toggleLogoutMenu()" />
       <span *ngIf="userName">{{ userName }}</span>
       <span *ngIf="userRole" class="user-role-badge">{{ userRole }}</span>
-    </div>
+  </div>
+  <div class="logout-menu" [ngClass]="{'show': isLogoutMenuOpen}">
+      <a routerLink="/profile">Profil</a>
+      <a routerLink="/settings">Paramètres</a>
+      <a (click)="logout()">Déconnexion</a>
+  </div>
+</div>
   </div>
 
   <div class="sidebar">
@@ -42,6 +48,7 @@
       <li>
         <a routerLink="/help"><mat-icon>help</mat-icon> <div>Help</div></a>
       </li>
+     
     </ul>
   </div>
 
@@ -89,4 +96,3 @@
     </div>
     <div class="charts"></div>
   </div>
-</div>

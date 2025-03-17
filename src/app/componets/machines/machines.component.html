@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- Header -->
   <div class="header">
     <div class="title-container">
       <i class="fas fa-microchip"></i> <h2>Gestion des Machines</h2>
@@ -6,6 +7,7 @@
     <button class="add-robot-button" (click)="openAddMachineModal()">Ajouter Machine</button>
   </div>
 
+  <!-- Modal pour Ajouter une Machine -->
   <div class="modal" *ngIf="showAddMachineModal">
     <div class="modal-content">
       <span class="close" (click)="closeAddMachineModal()">&times;</span>
@@ -18,7 +20,9 @@
         <div class="form-group">
           <label for="machineFrequency">Fréquence</label>
           <select id="machineFrequency" [(ngModel)]="newMachine.radioFrequency.id" name="machineFrequency" required>
-            <option *ngFor="let freq of frequencies" [value]="freq.id">{{ freq.uid }}</option>
+            <option *ngFor="let freq of frequencies; trackBy: trackByFrequencyId" [value]="freq.id">
+              {{ freq.uid }}
+            </option>
           </select>
         </div>
         <button type="submit" class="save-button">Enregistrer</button>
@@ -27,32 +31,40 @@
     </div>
   </div>
 
-  <div class="modal" *ngIf="showEditMachineModal">
-    <div class="modal-content">
-      <span class="close" (click)="closeEditMachineModal()">&times;</span>
-      <h3>Éditer la machine</h3>
-      <form (ngSubmit)="saveEditedMachine()">
-        <div class="form-group">
-          <label for="machineName">Nom de la Machine</label>
-          <input type="text" id="machineName" [(ngModel)]="selectedMachine.name" name="machineName" required>
-        </div>
-        <div class="form-group">
-          <label for="machineFrequency">Fréquence</label>
-          <select id="machineFrequency" [(ngModel)]="selectedMachine.radioFrequency.id" name="machineFrequency" required>
-            <option *ngFor="let freq of frequencies" [value]="freq.id">{{ freq.uid }}</option>
-          </select>
-        </div>
-        <button type="submit" class="save-button">Enregistrer</button>
-        <button type="button" class="cancel-button" (click)="closeEditMachineModal()">Annuler</button>
-      </form>
-    </div>
+  <!-- Modal pour Modifier une Machine -->
+<div class="modal" *ngIf="showEditMachineModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditMachineModal()">&times;</span>
+    <h3>Éditer la machine</h3>
+    <form (ngSubmit)="saveEditedMachine()">
+      <div class="form-group">
+        <label for="editMachineName">Nom de la Machine</label>
+        <input type="text" id="editMachineName" [(ngModel)]="selectedMachine.name" name="editMachineName" required>
+      </div>
+      <div class="form-group">
+        <label for="editMachineFrequency">Fréquence</label>
+        <select [(ngModel)]="selectedMachine.radioFrequencyId" 
+                (ngModelChange)="updateSelectedMachineFrequency($event)" 
+                name="radioFrequency">
+          <option *ngFor="let freq of frequencies; trackBy: trackByFrequencyId" [value]="freq.id">
+            {{ freq.uid }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="save-button">Enregistrer</button>
+      <button type="button" class="cancel-button" (click)="closeEditMachineModal()">Annuler</button>
+    </form>
   </div>
+</div>
 
+
+  <!-- Recherche -->
   <div class="search-container">
     <input type="text" id="myInput" (keyup)="searchMachines()" placeholder="Rechercher des machines..." title="Tapez un nom de machine">
     <i class="fas fa-search search-icon"></i>
   </div>
 
+  <!-- Tableau des Machines -->
   <table id="dataTable">
     <thead>
       <tr>
@@ -62,9 +74,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let machine of searchMachines()">
+      <tr *ngFor="let machine of searchMachines(); trackBy: trackByMachineId">
         <td><i class="fas fa-microchip robot-icon"></i> {{ machine.name }}</td>
-        <td>{{ machine.radioFrequency.uid }}</td>
+        <td>{{ machine.radioFrequency?.uid }}</td>
         <td *ngIf="isSuperAdmin()">
           <button class="action-button edit-button" (click)="openEditMachineModal(machine)">
             <i class="fas fa-edit"></i>

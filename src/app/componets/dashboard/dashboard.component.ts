@@ -24,7 +24,10 @@ export class DashboardComponent implements OnInit {
   user: any;
   isSuperAdmin: boolean = false;
   userRole: string | null = null;
-  userName: string | null = null; // Pour afficher le nom aussi
+  userName: string | null = null; 
+  isLogoutMenuOpen = false; 
+
+
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -61,4 +64,15 @@ export class DashboardComponent implements OnInit {
     console.log('Voir les robots');
     this.router.navigate(['/robots']); 
   }
+  toggleLogoutMenu(): void {
+    this.isLogoutMenuOpen = !this.isLogoutMenuOpen;
+}
+
+logout(): void {
+    this.authService.logout(); // Supposons que vous avez une méthode logout dans AuthService
+    this.router.navigate(['/login']);
+    this.isLogoutMenuOpen = false;
+}
+
+ 
 }

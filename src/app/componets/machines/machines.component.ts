@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Machine } from '../../models/machine.model';
@@ -18,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
 export class MachinesComponent implements OnInit {
   machines: Machine[] = [];
   frequencies: radioFrequency[] = [];
-  newMachine: Machine = new Machine('', 0, { id: 0, uid: '' });  // Initialisation de newMachine
+  newMachine: Machine = new Machine('', 0, { id: 0, uid: '' });
   selectedMachine: Machine = new Machine('', 0, { id: 0, uid: '' });
   showAddMachineModal: boolean = false;
   showEditMachineModal: boolean = false;
@@ -33,21 +32,19 @@ export class MachinesComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMachines();
     this.getAllFrequencies();
-    this.selectedMachine = new Machine('Machine 1', 1, { id: 1, uid: 'uid-001' });
-
   }
 
   getAllMachines(): void {
     this.machineService.getAllMachines().subscribe(
-      (data: Machine[]) => { this.machines = data; },
-      (error) => { console.error('Erreur lors de la récupération des machines', error); }
+      (data: Machine[]) => this.machines = data,
+      (error) => console.error('Erreur lors de la récupération des machines', error)
     );
   }
 
   getAllFrequencies(): void {
     this.frequencyService.getAllFrequencies().subscribe(
-      (data: radioFrequency[]) => { this.frequencies = data; },
-      (error) => { console.error('Erreur lors de la récupération des fréquences', error); }
+      (data: radioFrequency[]) => this.frequencies = data,
+      (error) => console.error('Erreur lors de la récupération des fréquences', error)
     );
   }
 
@@ -78,7 +75,7 @@ export class MachinesComponent implements OnInit {
         this.getAllMachines();
         this.closeAddMachineModal();
       },
-      (error) => { console.error('Erreur lors de l\'ajout de la machine', error); }
+      (error) => console.error('Erreur lors de l\'ajout de la machine', error)
     );
   }
 
@@ -96,32 +93,66 @@ export class MachinesComponent implements OnInit {
   }
 
   saveEditedMachine(): void {
-    if (!this.isSuperAdmin() || !this.selectedMachine) {
+    if (!this.isSuperAdmin()) {
       alert('Accès refusé. Seul le Super Admin peut modifier une machine.');
       return;
     }
 
-    this.machineService.updateMachine(this.selectedMachine.id!, this.selectedMachine).subscribe(
+    if (!this.selectedMachine || !this.selectedMachine.id) {
+      console.error("Aucune machine sélectionnée ou ID invalide.");
+      return;
+    }
+
+    const selectedFrequency = this.frequencies.find(freq => freq.id === this.selectedMachine.radioFrequencyId);
+    if (selectedFrequency) {
+      this.selectedMachine.radioFrequency = selectedFrequency;
+    }
+
+    this.machineService.updateMachine(this.selectedMachine.id, this.selectedMachine).subscribe(
       () => {
         this.getAllMachines();
         this.closeEditMachineModal();
       },
-      (error) => { console.error('Erreur lors de la mise à jour de la machine', error); }
+      (error) => {
+        console.error("Erreur lors de la mise à jour de la machine :", error);
+        alert("Une erreur est survenue lors de la mise à jour. Veuillez réessayer.");
+      }
     );
   }
 
   deleteMachine(machineId: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette machine ?')) {
-      this.machineService.deleteMachine(machineId).subscribe(
-        () => { this.getAllMachines(); },
-        (error) => { console.error('Erreur lors de la suppression de la machine', error); }
-      );
+    this.machines = this.machines.filter(machine => machine.id !== machineId);
+  
+    this.machineService.deleteMachine(machineId).subscribe(
+      () => {
+        console.log('Machine supprimée avec succès');
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression de la machine', error);
+        this.getAllMachines(); 
+      }
+    );
+  }
+  
+
+  searchMachines(): Machine[] {
+    return this.machines.filter(machine => 
+      machine.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  updateSelectedMachineFrequency(newFrequencyId: number): void {
+    const selectedFrequency = this.frequencies.find(freq => freq.id === newFrequencyId);
+    if (selectedFrequency) {
+      this.selectedMachine.radioFrequency = { ...selectedFrequency };
     }
   }
 
-  searchMachines(): Machine[] {
-    return this.machines.filter(machine =>
-      machine.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+  trackByMachineId(index: number, machine: Machine): number {
+    return machine.id ?? index;
+  }
+
+  trackByFrequencyId(index: number, freq: radioFrequency): number {
+    return freq.id;
   }
 }
