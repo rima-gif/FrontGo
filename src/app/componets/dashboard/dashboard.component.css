@@ -33,17 +33,40 @@ body {
 }
 
 .logo img {
-    max-height: 40px;
-    margin-right: 10px;
+    max-height: 50px;
+    margin-right: 8px;
 }
 
 .logo h2 {
-    color:#012169; /* Couleur accentuée pour le logo */
-    font-size: large;
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-    font-style: oblique;
+    font-size: 2rem; /* Ajuste la taille selon tes besoins */
+    margin-right: 8px; /* Espacement entre le texte et l'icône */
+    font-family: 'Pacifico', cursive; /* Police moderne et stylée */
+    font-weight: bold;
+    
+    /* Dégradé de couleur appliqué sur le texte */
+    background: linear-gradient(45deg, #012169, #5072A7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(4px);
+    
+    /* Effet d'ombre pour ajouter de la profondeur */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+.logo i {
+   font-size: 20px;
+   margin-bottom: 8px; /* Espacement entre le texte et l'icône */
+   color:  #5072A7;
+   transform: translateY(8px);
+    /* Effet HD */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Ombre légère pour effet 3D */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Ombre portée plus réaliste */
+    
+    /* Amélioration visuelle */
+    transition: transform 0.2s ease-in-out, color 0.3s; /* Animation fluide */
+
+
+
+  }
 
 .search {
     position: relative;
@@ -82,7 +105,7 @@ body {
 .logout-menu {
     position: absolute;
     top: 100%;
-    margin-left: 10px;;
+    margin-left: 1090px;;
     background: #333;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -119,7 +142,6 @@ body {
 }
 
 .user-role-badge {
-    /* background-color:linear-gradient(to bottom, #1A237E, #283593 50%, #121212); */
     color: #002D62;
     font-weight: bold;
     padding: 5px 10px;
@@ -134,7 +156,8 @@ body {
     top: 60px;
     width: 260px;
     height: calc(100vh - 60px);
-    background:#5D8AA8;}
+    background: linear-gradient(45deg, #5072A7, #1A237E);
+}
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -162,7 +185,15 @@ body {
     min-width: 60px;
     font-size: 24px;
     text-align: center;
+    color: #5072A7;
+    
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); 
+    
+    transition: transform 0.2s ease-in-out, color 0.3s;
 }
+
+
 
 
 /* Main section */
@@ -208,6 +239,13 @@ body {
     font-size: 30px;
     font-weight: 500;
     color: #5072A7;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Ombre légère pour effet 3D */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Ombre portée plus réaliste */
+    
+    /* Amélioration visuelle */
+    transition: transform 0.2s ease-in-out, color 0.3s; /* Animation fluide */
+
+
 }
 
 .card-content {
@@ -231,6 +269,13 @@ body {
     font-weight: 600;
     line-height: 1;
     vertical-align: middle;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Ombre légère pour effet 3D */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Ombre portée plus réaliste */
+    
+    /* Amélioration visuelle */
+    transition: transform 0.2s ease-in-out, color 0.3s; /* Animation fluide */
+
+
 }
 
 .card-name {
@@ -257,4 +302,15 @@ body {
     border-radius: 50%;
     filter: blur(100px);
     z-index: 0;
+}
+.mat-icon{
+    color:  #5072A7;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Ombre légère pour effet 3D */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Ombre portée plus réaliste */
+    
+    /* Amélioration visuelle */
+    transition: transform 0.2s ease-in-out, color 0.3s; /* Animation fluide */
+
+
+
 }
