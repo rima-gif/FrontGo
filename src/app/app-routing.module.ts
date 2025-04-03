@@ -8,6 +8,7 @@ import { DashboardComponent } from './componets/dashboard/dashboard.component';
 import{RobotsComponent} from './componets/robots/robots.component';
 import{RFidComponent} from './componets/rfid/rfid.component';
 import{MachinesComponent} from './componets/machines/machines.component';
+import{MissionComponent} from './componets/mission/mission.component'
 import{AuthGuard} from './services/auth.guard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
@@ -21,6 +22,8 @@ const routes: Routes = [
   { path: 'robots', component: RobotsComponent,canActivate: [AuthGuard] },
   {path :'locations',component:RFidComponent,canActivate:[AuthGuard]},
   {path:'machines',component:MachinesComponent,canActivate:[AuthGuard]},
+  {path:'missions',component:MissionComponent,canActivate:[AuthGuard]},
+
   { path: '**', redirectTo: '/login' } 
 ];
 

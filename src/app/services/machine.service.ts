@@ -15,11 +15,11 @@ export class MachineService{
 
     constructor(private http:HttpClient,private authService:AuthService ){}
 
-    addMachine(machineData:any):Observable<any>{
+    addMachine(machine:any):Observable<any>{
         if(!this.authService.isSuperAdmin()){
             return throwError(()=> new Error("Accès refusé. Seul le Super Admin peut ajouter une machine."));
         }
-        return this.http.post(`${this.machineUrl}/create`, machineData, this.getAuthHeaders()).pipe(
+        return this.http.post(`${this.machineUrl}/create`, machine, this.getAuthHeaders()).pipe(
             catchError(this.handleError)
           );
         }
@@ -31,11 +31,11 @@ export class MachineService{
           catchError(this.handleError)
         );
       }
-      updateMachine(machineId: number, machineData: Machine): Observable<Machine> {
+      updateMachine(id: number, machineData: any): Observable<any> {
         if (!this.authService.isSuperAdmin()) {
           return throwError(() => new Error('Accès refusé. Seul le Super Admin peut modifier une machine.'));
         }
-        return this.http.put<Machine>(`${this.machineUrl}/update/${machineId}`, machineData, this.getAuthHeaders()).pipe(
+        return this.http.put<Machine>(`${this.machineUrl}/update/${id}`, machineData, this.getAuthHeaders()).pipe(
           catchError(this.handleError)
         );
       }

@@ -156,7 +156,7 @@ body {
     top: 60px;
     width: 260px;
     height: calc(100vh - 60px);
-    background: linear-gradient(45deg, #5072A7, #1A237E);
+    background: linear-gradient(45deg, #80b3ff, #3d495c);
 }
 .sidebar ul {
     list-style: none;

@@ -17,8 +17,16 @@ import { AuthService } from '../../services/auth.service';
 export class MachinesComponent implements OnInit {
   machines: Machine[] = [];
   frequencies: radioFrequency[] = [];
-  newMachine: Machine = new Machine('', 0, { id: 0, uid: '' });
-  selectedMachine: Machine = new Machine('', 0, { id: 0, uid: '' });
+  newMachine: any = {
+    name: '',
+    radioFrequency: { id: 0 },
+    processed: false
+  };
+  selectedMachine: any = {
+    name: '',
+    radioFrequency: { id: 0 },
+    processed: false
+  };
   showAddMachineModal: boolean = false;
   showEditMachineModal: boolean = false;
   searchQuery: string = '';
@@ -43,7 +51,10 @@ export class MachinesComponent implements OnInit {
 
   getAllFrequencies(): void {
     this.frequencyService.getAllFrequencies().subscribe(
-      (data: radioFrequency[]) => this.frequencies = data,
+      (data: radioFrequency[]) => {
+        this.frequencies = data;
+        console.log('Fréquences récupérées:', this.frequencies);
+      },
       (error) => console.error('Erreur lors de la récupération des fréquences', error)
     );
   }
@@ -57,7 +68,11 @@ export class MachinesComponent implements OnInit {
       alert('Accès refusé. Seul le Super Admin peut ajouter une machine.');
       return;
     }
-    this.newMachine = new Machine('', 0, { id: 0, uid: '' });
+    this.newMachine = {
+      name: '',
+      radioFrequency: { id: 0 },
+      processed: false
+    };
     this.showAddMachineModal = true;
   }
 
@@ -66,25 +81,51 @@ export class MachinesComponent implements OnInit {
   }
 
   saveMachine(): void {
-    if (!this.isSuperAdmin()) {
-      alert('Accès refusé. Seul le Super Admin peut ajouter une machine.');
+    if (!this.isSuperAdmin()) return;
+  
+    if (!this.newMachine.radioFrequency?.id) {
+      alert("Sélectionnez une fréquence valide");
       return;
     }
-    this.machineService.addMachine(this.newMachine).subscribe(
-      () => {
+  
+    const payload = {
+      name: this.newMachine.name,
+      radioFrequency: {
+        id: this.newMachine.radioFrequency.id
+      },
+      processed: false
+    };
+  
+    console.log('Envoi au backend:', payload); // Debug
+  
+    this.machineService.addMachine(payload).subscribe({
+      next: () => {
         this.getAllMachines();
         this.closeAddMachineModal();
       },
-      (error) => console.error('Erreur lors de l\'ajout de la machine', error)
-    );
+      error: (err) => {
+        console.error('Erreur:', err);
+        alert(err.error?.message || "Erreur serveur");
+      }
+    });
   }
 
   openEditMachineModal(machine: Machine): void {
     if (!this.isSuperAdmin()) {
-      alert('Accès refusé. Seul le Super Admin peut modifier une machine.');
+      alert('Accès refusé');
       return;
     }
-    this.selectedMachine = { ...machine };
+  
+    // Clonage profond avec conversion des types
+    this.selectedMachine = {
+      ...machine,
+      radioFrequency: {
+        id: Number(machine.radioFrequency.id),
+        uid: machine.radioFrequency.uid
+      }
+    };
+  
+    console.log('Machine sélectionnée pour édition:', this.selectedMachine);
     this.showEditMachineModal = true;
   }
 
@@ -94,32 +135,54 @@ export class MachinesComponent implements OnInit {
 
   saveEditedMachine(): void {
     if (!this.isSuperAdmin()) {
-      alert('Accès refusé. Seul le Super Admin peut modifier une machine.');
+      alert('Accès refusé');
       return;
     }
-
-    if (!this.selectedMachine || !this.selectedMachine.id) {
-      console.error("Aucune machine sélectionnée ou ID invalide.");
+  
+    if (!this.selectedMachine?.id) {
+      console.error("Machine invalide");
       return;
     }
-
-    const selectedFrequency = this.frequencies.find(freq => freq.id === this.selectedMachine.radioFrequencyId);
-    if (selectedFrequency) {
-      this.selectedMachine.radioFrequency = selectedFrequency;
+  
+    // Debug approfondi
+    console.log('ID fréquence recherché:', this.selectedMachine.radioFrequency.id);
+    console.log('Type de l\'ID:', typeof this.selectedMachine.radioFrequency.id);
+    console.log('Fréquences disponibles:', this.frequencies);
+  
+    // Recherche avec conversion explicite des types
+    const selectedFrequency = this.frequencies.find(freq => 
+      Number(freq.id) === Number(this.selectedMachine.radioFrequency.id)
+    );
+  
+    if (!selectedFrequency) {
+      console.error('Détails de la fréquence non trouvée:', {
+        searchedId: this.selectedMachine.radioFrequency.id,
+        availableIds: this.frequencies.map(f => f.id)
+      });
+      alert(`Fréquence ID ${this.selectedMachine.radioFrequency.id} non trouvée dans la liste locale`);
+      return;
     }
-
-    this.machineService.updateMachine(this.selectedMachine.id, this.selectedMachine).subscribe(
-      () => {
+  
+    // Construction du payload
+    const updatePayload = {
+      name: this.selectedMachine.name,
+      radioFrequencyId: selectedFrequency.id
+    };
+  
+    console.log('Payload final:', updatePayload);
+  
+    this.machineService.updateMachine(this.selectedMachine.id, updatePayload).subscribe({
+      next: () => {
         this.getAllMachines();
         this.closeEditMachineModal();
+        alert('Mise à jour réussie!');
       },
-      (error) => {
-        console.error("Erreur lors de la mise à jour de la machine :", error);
-        alert("Une erreur est survenue lors de la mise à jour. Veuillez réessayer.");
+      error: (err) => {
+        console.error('Erreur complète:', err);
+        alert(err.error?.message || 'Erreur lors de la mise à jour');
       }
-    );
+    });
   }
-
   deleteMachine(machineId: number): void {
     this.machines = this.machines.filter(machine => machine.id !== machineId);
   
@@ -133,7 +196,6 @@ export class MachinesComponent implements OnInit {
       }
     );
   }
-  
 
   searchMachines(): Machine[] {
     return this.machines.filter(machine => 

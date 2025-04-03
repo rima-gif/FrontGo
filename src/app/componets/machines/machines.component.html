@@ -41,7 +41,7 @@
       </div>
       <div class="form-group">
         <label for="editMachineFrequency">Fréquence</label>
-        <select [(ngModel)]="selectedMachine.radioFrequencyId" 
+        <select [(ngModel)]="selectedMachine.radioFrequency.id" 
                 (ngModelChange)="updateSelectedMachineFrequency($event)" 
                 name="radioFrequency">
           <option *ngFor="let freq of frequencies; trackBy: trackByFrequencyId" [value]="freq.id">

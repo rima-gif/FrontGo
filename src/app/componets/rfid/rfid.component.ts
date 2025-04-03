@@ -58,9 +58,15 @@ export class RFidComponent implements OnInit {
     if (this.frequencyForm.invalid) {
       return;
     }
-
+  
     const uid = this.frequencyForm.value.uid;
-
+  
+    // Vérifier si l'UID est composé de 8 chiffres
+    if (!/^\d{8}$/.test(uid)) {
+      alert("L'UID doit contenir exactement 8 chiffres !");
+      return;
+    }
+  
     if (this.isEditing && this.editingId) {
       this.updateUID(this.editingId, uid);
     } else {
@@ -69,10 +75,11 @@ export class RFidComponent implements OnInit {
           this.getAllFrequencies();
           this.closeModal();
         },
-        (error) => alert('Erreur lors de l\'ajout de l\'UID: ' + error.message)
+        (error) => alert("Erreur lors de l'ajout de l'UID: " + error.message)
       );
     }
   }
+  
 
   updateUID(id: number, uid: string) {
     this.radioFrequencyService.updateUID(id, uid).subscribe(

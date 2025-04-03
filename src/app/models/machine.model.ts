@@ -3,16 +3,24 @@ import { radioFrequency } from "./RadioFrequency.model";
 export class Machine {
   id?: number;
   name: string;
-  radioFrequencyId: number;
-  radioFrequency!: radioFrequency;
+  radioFrequency: {
+    id: number;
+    uid: string;
+  };
+  processed?: boolean;
+  missionId?: number;
 
-  // Assurez-vous que radioFrequency vient après les paramètres obligatoires
-  constructor(name: string, radioFrequencyId: number, radioFrequency: radioFrequency, id?: number) {
+  constructor(
+    name: string,
+    radioFrequency: radioFrequency,
+    id: number,
+    processed?: boolean,
+    missionId?: number
+  ) {
     this.name = name;
-    this.radioFrequencyId = radioFrequencyId;
     this.radioFrequency = radioFrequency;
-    if (id) {
-      this.id = id;
-    }
+    if (id) this.id = id;
+    if (processed !== undefined) this.processed = processed;
+    if (missionId) this.missionId = missionId;
   }
 }

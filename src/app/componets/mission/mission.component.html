@@ -1,1 +1,64 @@
-<p>mission works!</p>
+<div class="container">
+    <div class="main">
+      <div class="header">
+        <div class="title-container">
+          <i class="robot-icon fas fa-robot"></i>
+          <h2>Gestion des Missions</h2>
+        </div>
+        <button class="add-robot-button">
+          <i class="fas fa-plus"></i> Ajouter une Mission
+        </button>
+      </div>
+  
+      <!-- Recherche -->
+      <div class="search-container">
+        <input type="text" placeholder="Rechercher une mission..." />
+        <i class="search-icon fas fa-search"></i>
+      </div>
+  
+      <!-- Tableau des Missions -->
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mission of missions">
+            <td>{{ mission.nom }}</td>
+            <td [ngClass]="{'status-connected': mission.status === 'connected', 'status-disconnected': mission.status === 'disconnected'}">
+              {{ mission.status }}
+            </td>
+            <td>
+              <button class="action-button edit-button" (click)="editMission(mission)">Éditer</button>
+              <button class="action-button delete-button" (click)="deleteMission(mission)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Modal d'ajout/édition de mission -->
+      <div *ngIf="isModalOpen" class="modal">
+        <div class="modal-content">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h3>{{ modalTitle }}</h3>
+          <div class="form-group">
+            <label for="missionName">Nom de la Mission</label>
+            <input type="text" id="missionName" [(ngModel)]="missionForm.nom" />
+          </div>
+          <div class="form-group">
+            <label for="missionStatus">Statut</label>
+            <select id="missionStatus" [(ngModel)]="missionForm.status">
+              <option value="connected">Connecté</option>
+              <option value="disconnected">Déconnecté</option>
+            </select>
+          </div>
+          <button class="save-button" (click)="saveMission()">Enregistrer</button>
+          <button class="cancel-button" (click)="closeModal()">Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

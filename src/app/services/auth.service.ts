@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 
 @Injectable({
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/auth'; // URL de ton backend
+  private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -28,20 +31,21 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
-   getUser(): any {
-     return {
-       role: localStorage.getItem('role'),
-       token: localStorage.getItem('token')
-     };
+  getUser(): any {
+    if (!this.isLoggedIn()) return null;
+    return {
+      role: localStorage.getItem('role'),
+      token: localStorage.getItem('token')
+    };
   }
+  
  
 
-  // Vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean { 
-    return this.getToken() !== null;
+    const token = this.getToken();
+    return token !== null && !this.jwtHelper.isTokenExpired(token);
   }
 
-  // Vérifier si l'utilisateur est SUPER_ADMIN
   isSuperAdmin(): boolean {
     return localStorage.getItem('role') === 'ROLE_SUPER_ADMIN';
   }
